@@ -11,3 +11,14 @@
 {"level":"info","message":"::1 - - [18/Sep/2025:11:39:55 +0000] \"POST /api/auth/sign-up HTTP/1.1\" 201 58 \"-\" \"HTTPie\"","service":"user-service"}
 {"level":"info","message":"User registered successfully: xor@xor.com","service":"user-service"}
 {"level":"info","message":"::1 - - [18/Sep/2025:11:41:41 +0000] \"POST /api/auth/sign-up HTTP/1.1\" 201 107 \"-\" \"HTTPie\"","service":"user-service"}
+{"level":"info","message":"User created successfully: admin@admin.com","service":"user-service"}
+{"level":"info","message":"User registered successfully: admin@admin.com","service":"user-service"}
+{"level":"info","message":"::1 - - [18/Sep/2025:12:13:15 +0000] \"POST /api/auth/sign-up HTTP/1.1\" 201 114 \"-\" \"HTTPie\"","service":"user-service"}
+{"level":"info","message":"User created successfully: xor@xor.pro","service":"user-service"}
+{"level":"info","message":"User registered successfully: xor@xor.pro","service":"user-service"}
+{"level":"info","message":"::1 - - [18/Sep/2025:12:14:11 +0000] \"POST /api/auth/sign-up HTTP/1.1\" 201 107 \"-\" \"HTTPie\"","service":"user-service"}
+{"level":"info","message":"User authenticated successfully: xor@xor.pro","service":"user-service"}
+{"level":"info","message":"User signed in successfully: xor@xor.pro","service":"user-service"}
+{"level":"info","message":"::1 - - [18/Sep/2025:13:32:00 +0000] \"POST /api/auth/sign-in HTTP/1.1\" 200 106 \"-\" \"HTTPie\"","service":"user-service"}
+{"level":"info","message":"User signed out successfully","service":"user-service"}
+{"level":"info","message":"::1 - - [18/Sep/2025:13:32:41 +0000] \"POST /api/auth/sign-out HTTP/1.1\" 200 42 \"-\" \"HTTPie\"","service":"user-service"}
