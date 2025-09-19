@@ -5,6 +5,7 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 ## Development Commands
 
 ### Docker Development (Recommended)
+
 ```bash
 # Start development environment with Neon Local
 docker-compose -f docker-compose.dev.yml up --build
@@ -20,13 +21,14 @@ docker-compose -f docker-compose.dev.yml exec app npm run [command]
 ```
 
 ### Database Operations
+
 ```bash
 # Generate new migrations after model changes
 npm run db:generate
 docker-compose -f docker-compose.dev.yml exec app npm run db:generate
 
 # Apply migrations to database
-npm run db:migrate  
+npm run db:migrate
 docker-compose -f docker-compose.dev.yml exec app npm run db:migrate
 
 # Open Drizzle Studio for database management
@@ -35,6 +37,7 @@ docker-compose -f docker-compose.dev.yml exec app npm run db:studio
 ```
 
 ### Code Quality
+
 ```bash
 # Run ESLint
 npm run lint
@@ -46,6 +49,7 @@ npm run format:check
 ```
 
 ### Local Development (Non-Docker)
+
 ```bash
 # Install dependencies
 npm install
@@ -62,6 +66,7 @@ npm start
 This is a Node.js Express API for acquisitions management built with modern practices and security-first approach.
 
 ### Technology Stack
+
 - **Runtime**: Node.js 20+ with ES Modules
 - **Framework**: Express.js 5.x
 - **Database**: PostgreSQL via Neon Database with Drizzle ORM
@@ -72,6 +77,7 @@ This is a Node.js Express API for acquisitions management built with modern prac
 - **Development**: Docker with Neon Local for ephemeral database branches
 
 ### Project Structure
+
 ```
 src/
 ├── config/         # Database, logger, and security configuration
@@ -88,7 +94,9 @@ src/
 ```
 
 ### Import Aliases
+
 The project uses Node.js import maps for cleaner imports:
+
 - `#src/*` → `./src/*`
 - `#config/*` → `./src/config/*`
 - `#controllers/*` → `./src/controllers/*`
@@ -100,12 +108,14 @@ The project uses Node.js import maps for cleaner imports:
 - `#validations/*` → `./src/validations/*`
 
 ### Database Architecture
+
 - **Development**: Uses Neon Local proxy that creates ephemeral PostgreSQL branches
 - **Production**: Direct connection to Neon Cloud managed PostgreSQL
 - **ORM**: Drizzle ORM with schema-first approach
 - **Migrations**: Generated and managed via `drizzle-kit`
 
 ### Security Features
+
 - **Arcjet Integration**: Bot detection, rate limiting, and security shield
 - **Role-based Rate Limiting**: Different limits for admin (20/min), user (10/min), guest (5/min)
 - **JWT Authentication**: Secure tokens stored in HTTP-only cookies
@@ -115,6 +125,7 @@ The project uses Node.js import maps for cleaner imports:
 - **Non-root Container**: Production containers run as non-privileged user
 
 ### Authentication Flow
+
 1. User registration/login via `/api/auth/sign-up` and `/api/auth/sign-in`
 2. Password validation through Zod schemas
 3. bcrypt hashing for secure password storage
@@ -123,9 +134,10 @@ The project uses Node.js import maps for cleaner imports:
 6. Role-based access control (user/admin)
 
 ### Environment Configuration
+
 - **Development**: Uses `.env.development` with Neon Local configuration
 - **Production**: Uses `.env.production` with actual Neon Cloud URLs
-- **Required Variables**: 
+- **Required Variables**:
   - `DATABASE_URL` (Neon connection string)
   - `JWT_SECRET` (secure random string)
   - `NEON_API_KEY` (for development with Neon Local)
@@ -133,11 +145,13 @@ The project uses Node.js import maps for cleaner imports:
   - `ARCJET_KEY` (for security middleware)
 
 ### Development vs Production
+
 - **Development**: Ephemeral database branches, hot reload, console logging
 - **Production**: Persistent database, structured JSON logging, health checks
 - **Docker**: Multi-stage builds with optimized production images
 
 ### Code Style Standards
+
 - ES Modules with modern JavaScript features
 - ESLint configuration with 2-space indentation, single quotes, semicolons
 - Prettier for consistent code formatting
@@ -147,12 +161,14 @@ The project uses Node.js import maps for cleaner imports:
 - Arrow functions preferred for callbacks
 
 ### Testing and Quality
+
 - ESLint rules enforce consistent code style
 - Prettier for automated formatting
 - Winston logging with different transports for dev/prod
 - Docker health checks for production deployments
 
 ### Common Patterns
+
 - Controller → Service → Model architecture
 - Validation middleware using Zod schemas
 - Consistent error handling with logger integration

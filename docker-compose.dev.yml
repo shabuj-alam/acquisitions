@@ -6,13 +6,13 @@ services:
     image: neondatabase/neon_local:latest
     container_name: acquisitions-neon-local
     ports:
-      - "5432:5432"
+      - '5432:5432'
     env_file:
       - .env.development
     networks:
       - acquisitions-network
     healthcheck:
-      test: ["CMD", "nc", "-z", "localhost", "5432"]
+      test: ['CMD', 'nc', '-z', 'localhost', '5432']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -25,7 +25,7 @@ services:
       target: development
     container_name: acquisitions-app-dev
     ports:
-      - "3000:3000"
+      - '3000:3000'
     env_file:
       - .env.development
     volumes:
@@ -39,7 +39,7 @@ services:
         condition: service_healthy
     networks:
       - acquisitions-network
-    command: ["npm", "run", "dev"]
+    command: ['npm', 'run', 'dev']
 
 networks:
   acquisitions-network:

@@ -34,7 +34,7 @@ jobs:
           set +e  # Don't exit immediately on failure
           npm test -- --verbose --passWithNoTests
           TEST_EXIT_CODE=$?
-          
+
           if [ $TEST_EXIT_CODE -ne 0 ]; then
             echo "::error::Some tests failed. Check the test output above for details."
             echo "test_failed=true" >> $GITHUB_OUTPUT
@@ -42,7 +42,7 @@ jobs:
             echo "::notice::All tests passed successfully!"
             echo "test_failed=false" >> $GITHUB_OUTPUT
           fi
-          
+
           exit $TEST_EXIT_CODE
 
       - name: Upload coverage reports
@@ -59,7 +59,7 @@ jobs:
         run: |
           echo "# 🧪 Test Results" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           if [ "${{ steps.test_run.outputs.test_failed }}" = "true" ]; then
             echo "❌ **Some tests failed**" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
@@ -67,17 +67,17 @@ jobs:
           else
             echo "✅ **All tests passed!**" >> $GITHUB_STEP_SUMMARY
           fi
-          
+
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "## 📊 Coverage Report" >> $GITHUB_STEP_SUMMARY
-          
+
           if [ -f "coverage/lcov-report/index.html" ]; then
             echo "Coverage reports have been generated and uploaded as artifacts." >> $GITHUB_STEP_SUMMARY
             echo "Download the coverage reports artifact to view detailed coverage information." >> $GITHUB_STEP_SUMMARY
           else
             echo "No coverage report generated." >> $GITHUB_STEP_SUMMARY
           fi
-          
+
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Environment:** Node.js ${{ matrix.node-version || '20.x' }}" >> $GITHUB_STEP_SUMMARY
           echo "**Test Environment:** ${{ env.NODE_ENV }}" >> $GITHUB_STEP_SUMMARY

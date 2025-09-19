@@ -5,11 +5,13 @@ This document provides examples for testing the newly implemented User CRUD oper
 ## Prerequisites
 
 1. Start the development environment:
+
 ```bash
 docker-compose -f docker-compose.dev.yml up --build
 ```
 
 2. Create a user account and get authentication token:
+
 ```bash
 curl -X POST http://localhost:3000/api/auth/sign-up \
   -H "Content-Type: application/json" \
@@ -22,6 +24,7 @@ curl -X POST http://localhost:3000/api/auth/sign-up \
 ```
 
 3. Sign in to get authentication cookie:
+
 ```bash
 curl -X POST http://localhost:3000/api/auth/sign-in \
   -H "Content-Type: application/json" \
@@ -35,18 +38,21 @@ curl -X POST http://localhost:3000/api/auth/sign-in \
 ## API Endpoints Testing
 
 ### 1. Get All Users
+
 ```bash
 curl -X GET http://localhost:3000/api/users \
   -b cookies.txt
 ```
 
 ### 2. Get User by ID
+
 ```bash
 curl -X GET http://localhost:3000/api/users/1 \
   -b cookies.txt
 ```
 
 ### 3. Update User (Self)
+
 ```bash
 curl -X PUT http://localhost:3000/api/users/1 \
   -H "Content-Type: application/json" \
@@ -58,7 +64,9 @@ curl -X PUT http://localhost:3000/api/users/1 \
 ```
 
 ### 4. Update User Role (Admin only)
+
 First create an admin user, then:
+
 ```bash
 curl -X PUT http://localhost:3000/api/users/1 \
   -H "Content-Type: application/json" \
@@ -69,6 +77,7 @@ curl -X PUT http://localhost:3000/api/users/1 \
 ```
 
 ### 5. Delete User (Self or Admin)
+
 ```bash
 curl -X DELETE http://localhost:3000/api/users/1 \
   -b cookies.txt
@@ -77,6 +86,7 @@ curl -X DELETE http://localhost:3000/api/users/1 \
 ## Response Examples
 
 ### Success Response (Get User):
+
 ```json
 {
   "message": "User fetched successfully",
@@ -92,6 +102,7 @@ curl -X DELETE http://localhost:3000/api/users/1 \
 ```
 
 ### Error Response (Unauthorized):
+
 ```json
 {
   "error": "Access denied",
@@ -100,6 +111,7 @@ curl -X DELETE http://localhost:3000/api/users/1 \
 ```
 
 ### Error Response (Forbidden):
+
 ```json
 {
   "error": "Forbidden",
@@ -111,7 +123,7 @@ curl -X DELETE http://localhost:3000/api/users/1 \
 
 1. **GET /api/users**: Requires authentication
 2. **GET /api/users/:id**: Requires authentication
-3. **PUT /api/users/:id**: 
+3. **PUT /api/users/:id**:
    - Users can only update their own information
    - Only admins can change user roles
    - Only admins can update any user's information
@@ -122,9 +134,11 @@ curl -X DELETE http://localhost:3000/api/users/1 \
 ## Validation Rules
 
 ### User ID Parameter:
+
 - Must be a valid number
 
 ### Update User Body:
+
 - `name`: Optional, 2-255 characters, trimmed
 - `email`: Optional, valid email format, max 255 characters, lowercase, trimmed
 - `role`: Optional, either 'user' or 'admin'
@@ -133,6 +147,7 @@ curl -X DELETE http://localhost:3000/api/users/1 \
 ## Testing Scenarios
 
 ### Valid Scenarios:
+
 1. User updates their own name/email
 2. Admin updates any user's information
 3. Admin changes user roles
@@ -140,6 +155,7 @@ curl -X DELETE http://localhost:3000/api/users/1 \
 5. Admin deletes other users
 
 ### Invalid Scenarios (should return errors):
+
 1. Non-admin user trying to update another user
 2. Non-admin user trying to change roles
 3. User trying to delete another user's account
@@ -152,6 +168,7 @@ curl -X DELETE http://localhost:3000/api/users/1 \
 ## Database Schema
 
 The users table contains:
+
 - `id`: Serial primary key
 - `name`: VARCHAR(255) NOT NULL
 - `email`: VARCHAR(255) NOT NULL UNIQUE

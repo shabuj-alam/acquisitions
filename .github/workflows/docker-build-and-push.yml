@@ -61,13 +61,13 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "## 🏷️ Tags Published" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           # Parse and display tags
           TAGS="${{ steps.meta.outputs.tags }}"
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
           echo "$TAGS" | tr ',' '\n' | sed 's/^/- /' >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          
+
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "## 🏗️ Build Details" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
@@ -76,7 +76,7 @@ jobs:
           echo "**Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
           echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
           echo "**Build Cache:** Enabled (GitHub Actions cache)" >> $GITHUB_STEP_SUMMARY
-          
+
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "## 🚀 Usage" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
