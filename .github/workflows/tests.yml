@@ -13,7 +13,7 @@ jobs:
     env:
       NODE_ENV: test
       NODE_OPTIONS: --experimental-vm-modules
-      DATABASE_URL: sqlite://test.db
+      DATABASE_URL: ${{ secrets.TEST_DATABASE_URL || 'postgresql://test:test@localhost:5432/test_acquisitions' }}
 
     steps:
       - name: Checkout code
@@ -29,7 +29,7 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        id: test_run
+        id: test
         run: |
           set +e  # Don't exit immediately on failure
           npm test -- --verbose --passWithNoTests
